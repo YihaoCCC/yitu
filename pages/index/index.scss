@@ -1,7 +1,9 @@
 .container {
 		width: 100%;
 		position: relative;
-		height: 100vh;
+		min-height: 100vh;
+		padding-bottom: var(--window-bottom);
+		overflow: hidden;
 		.goHome {
 			transform: translateY(-100vh);
 			opacity: 0;
@@ -66,7 +68,7 @@
 	padding-bottom: 16px;
 }
 .home {
-	height: 100vh;
+	min-height: 100vh;
 
 	padding: 10px 0px 10px 10px;
 	overflow: hidden;
@@ -144,5 +146,10 @@
 			padding-bottom: 10px;
 		}
 		
+	}
+	.home-featured {
+		.content {
+			overflow: auto;
+		}
 	}
 }

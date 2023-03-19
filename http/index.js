@@ -8,7 +8,7 @@ $http.beforeRequest = function (options) {
   })
 }
 // 请求完成之后做一些事情
-$http.afterRequest = function () {
+$http.afterRequest = function (res) {
   uni.hideLoading()
 }
 

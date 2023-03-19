@@ -40,12 +40,15 @@
 						Popular Experiences
 					</view>
 					<view class="content" >
-						<PhotoCart v-for="item in experiences" :imgUrl='item.url' :title='item.title' :place='item.place'></PhotoCart>
+						<PhotoCart v-for="item in experiences" :imgUrl='item.url' :title='item.title' :place='item.place' :imgType='item.imgType'></PhotoCart>
 					</view>
 			</view>
 			<view class="home-featured">
 				<view class="content-title">
 					Featured
+				</view>
+				<view class="content" :scroll-y="true">
+					<PhotoCart v-for="item in feature" :imgUrl='item.url' :title='item.title' :place='item.place' :imgType='item.imgType'></PhotoCart>
 				</view>
 			</view>
 		</view>
@@ -67,7 +70,7 @@
 	const name=ref('cyh') 
 	// const screenHeight=ref('') 
 	const goHome = ref(false)
-	const testData =ref('')
+	const feature =ref([])
 	const experiences = ref([])
 	const activeType = ref(1)
 	onLoad(()=> {
@@ -76,9 +79,12 @@
 		
 		})
 	onMounted(() => {
-		uni.yhHttp.get('/get_all_photos').then(res => {
-			testData.value = res.data.data[0].discription
+		uni.yhHttp.get('/get_all_photos', { imgType: "vertical" }).then(res => {
+			console.log(res);
 			experiences.value = res.data.data
+		})
+		uni.yhHttp.get('/get_all_photos', { imgType: 'cross' }).then(res => {
+			feature.value = res.data.data
 		})
 	})
 	const showHomePage = () => {
