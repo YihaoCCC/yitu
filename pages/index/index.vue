@@ -29,17 +29,24 @@
 					<image src="../../static/index-bg.png" mode=""></image>
 				</view>
 			</view>
-			<view class="">
-				周日工作内容！！！
-				tabbar 切换
-				https 和 showtost组件封装
-			</view>
+			<view class="home-type-change">
+				<view v-for="(item,index) in photoTypeData" :key="item.id" class="type-item"
+				:class="activeType === item.id ? 'active' : ''" @click="activeType=item.id">
+					{{item.type}}
+				</view>
+			</view>	
 			<view class="home-experiences">
-				
-					<template v-for="item in experiences">
-						<PhotoCart :imgUrl='item.url' :title='item.title' :place='item.place'></PhotoCart>
-					</template>
-				
+					<view class="content-title">
+						Popular Experiences
+					</view>
+					<view class="content" >
+						<PhotoCart v-for="item in experiences" :imgUrl='item.url' :title='item.title' :place='item.place'></PhotoCart>
+					</view>
+			</view>
+			<view class="home-featured">
+				<view class="content-title">
+					Featured
+				</view>
 			</view>
 		</view>
 	</view>
@@ -56,13 +63,15 @@
 	onMounted,
 	} from 'vue'; 
 	import PhotoCart from '../../component/PhotoCart.vue'
+	import { photoType as photoTypeData} from '../../utils/publicData/index-type'
 	const name=ref('cyh') 
-	const screenHeight=ref('') 
+	// const screenHeight=ref('') 
 	const goHome = ref(false)
 	const testData =ref('')
 	const experiences = ref([])
+	const activeType = ref(1)
 	onLoad(()=> {
-		screenHeight.value = uni.getSystemInfoSync().windowHeight;
+		// screenHeight.value = uni.getSystemInfoSync().windowHeight;
 		uni.hideTabBar()
 		
 		})
