@@ -1,0 +1,70 @@
+{
+	"lazyCodeLoading": "requiredComponents",
+	"tabBar": {
+		"selectedColor": "#031F2A",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/home.png",
+				"selectedIconPath": "static/home-active.png",
+				"text": "Home"
+			},
+			{
+				"pagePath": "pages/discovery/discovery",
+				"iconPath": "static/discovery.png",
+				"selectedIconPath": "static/discovery-active.png",
+				"text": "Discovery"
+			},
+			{
+				"pagePath": "pages/location/location",
+				"iconPath": "static/location.png",
+				"selectedIconPath": "static/location-active.png",
+				"text": "Loaction"
+			},
+			{
+				"pagePath": "pages/calendar/calendar",
+				"iconPath": "static/calendar.png",
+				"selectedIconPath": "static/calendar-active.png",
+				"text": "Calendar"
+			}
+		]
+	},
+	"pages": [{
+		"path": "pages/index/index",
+		"style": {
+			"navigationBarBackgroundColor": "#00395f",
+			"navigationBarTitleText": "奕·图",
+			"navigationBarTextStyle": "white"
+			
+		}
+	}, {
+		"path": "pages/location/location",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/calendar/calendar",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/discovery/discovery",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
+
+	}],
+	"globalStyle": {
+		"navigationBarBackgroundColor": "#ffffff",
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	}
+}
