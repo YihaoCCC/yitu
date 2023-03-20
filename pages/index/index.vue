@@ -26,12 +26,12 @@
 					</view>
 				</view>
 				<view class="avtar">
-					<image src="../../static/index-bg.png" mode=""></image>
+					<image src="../../static/avtar.jpg" mode=""></image>
 				</view>
 			</view>
 			<view class="home-type-change">
 				<view v-for="(item,index) in photoTypeData" :key="item.id" class="type-item"
-				:class="activeType === item.id ? 'active' : ''" @click="activeType=item.id">
+				:class="activeType === item.id ? 'active' : ''" @click="typeChange(item)">
 					{{item.type}}
 				</view>
 			</view>	
@@ -48,7 +48,7 @@
 					Featured
 				</view>
 				<view class="content" :scroll-y="true">
-					<PhotoCart v-for="item in feature" :imgUrl='item.url' :title='item.title' :place='item.place' :imgType='item.imgType'></PhotoCart>
+					<PhotoCart  v-for="(item,index) in feature" :imgUrl='item.url' :title='item.title' :place='item.place' :imgType='item.imgType' :discription='item.discription'></PhotoCart>
 				</view>
 			</view>
 		</view>
@@ -56,15 +56,8 @@
 </template>
 
 <script setup>
-	import {
-		onLoad,
-		onShow
-	} from "@dcloudio/uni-app";
-	import {
-	ref,
-	computed,
-	onMounted,
-	} from 'vue'; 
+	import { onLoad, onShow } from "@dcloudio/uni-app";
+	import { ref, computed, onMounted, } from 'vue'; 
 	import PhotoCart from '../../component/PhotoCart.vue'
 	import { photoType as photoTypeData} from '../../utils/publicData/index-type'
 	const name=ref('cyh') 
@@ -75,16 +68,15 @@
 	const activeType = ref(1)
 	onLoad(()=> {
 		// screenHeight.value = uni.getSystemInfoSync().windowHeight;
-		uni.hideTabBar()
+		// uni.hideTabBar()
 		
-		})
+	})
 	onMounted(() => {
 		uni.yhHttp.get('/get_all_photos', { imgType: "vertical" }).then(res => {
-			console.log(res);
-			experiences.value = res.data.data
+			experiences.value = res.data.data.sort(function(){return Math.random()>0.5?-1:1;})
 		})
 		uni.yhHttp.get('/get_all_photos', { imgType: 'cross' }).then(res => {
-			feature.value = res.data.data
+			feature.value = res.data.data.sort(function(){return Math.random()>0.5?-1:1;})
 		})
 	})
 	const showHomePage = () => {
@@ -97,8 +89,12 @@
 				frontColor: '#000000'
 			})
 		}, 800)
-
 	}
+	const typeChange = (item) => {
+		activeType.value = item.id
+		
+	}
+	
 </script>
 
 <style lang="scss" scoped>

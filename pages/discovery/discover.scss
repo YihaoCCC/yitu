@@ -1,0 +1,34 @@
+.discover {
+	padding: 32px;
+	box-sizing: border-box;
+	.discover-title {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		text {
+			font-size: 32px;
+			font-weight: 700;
+			line-height: 36px;
+		}
+	}
+	.discover-type {		
+	  display: flex;
+	  align-items: center;
+	  padding: 20px 0;
+	  overflow: scroll;
+	  .type-item {
+		  text-align: center;
+		  color: rgb(3, 31, 42);
+		  padding: 8px 16px;
+		  background: rgba(3, 31, 42, 0.05);
+		  border-radius: 8px;
+		  margin-right: 8px;
+		  transition: all .3s ease-in-out; 
+		  &.active {
+			 background: rgb(3, 31, 42);
+			 color: #fff;
+		  }
+	  }
+		
+	}
+}
