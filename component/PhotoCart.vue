@@ -1,15 +1,17 @@
 <template>
-	<view class="card-box" :ref="imgType === 'vertical' ? 'vertical' : 'cross'" :class="imgType === 'vertical' ? 'vertical' : 'cross' " @click="openCard">
-		<image :src="imgUrl" mode="aspectFill"></image>
-		<view class="card-info">
-			<view class="title">
-				{{title}}
-			</view>
-			<view class="place">
-				{{place}}
-			</view>
-			<view class="discription" v-if="imgType === 'cross'">
-				{{discription}}
+	<view :class="crossExpandId === id ? 'active':''">
+		<view class="card-box" :class="imgType === 'vertical' ? 'vertical' : 'cross' " @click="test">
+			<image class="card-img" :src="imgUrl" mode="aspectFill"></image>
+			<view class="card-info">
+				<view class="title">
+					{{title}}
+				</view>
+				<view class="place">
+					{{place}}
+				</view>
+				<view class="discription" v-if="imgType === 'cross'">
+					{{discription}}
+				</view>
 			</view>
 		</view>
 	</view>
@@ -17,8 +19,8 @@
 
 <script setup>
 	import { ref } from 'vue'
-	const cross = ref(null)
-	defineProps({		
+	const emit =defineEmits(['active'])
+	const props = defineProps({		
 		imgUrl: {
 			type: String,
 			required: true
@@ -38,29 +40,34 @@
 		discription: {
 			type: String,
 			default: '这是一段描述'
-		}
+		},
+		id: String,
+		crossExpandId: String
 	})
-	const openCard = (e) => {
-		// 使用ref获取当前dom
-		cross.value.$el.className.indexOf('active') === -1 ? cross.value.$el.classList.add('active') : cross.value.$el.classList.remove('active')
-		
+	const test = () => {
+		console.log(props.id);
+		emit('active', props.id)
 	}
+	
 </script>
 
 <style lang="scss" scoped>
-	.card-box.active {
-		image {
-			height: 240px !important;
-			transition: all .3s ease-in-out; 
-		}
-		.card-info {
-			background: linear-gradient(rgba(0,0,0,0),rgba(74, 74, 74, 1.0));
-			.discription {
-				right: 10%;
-				opacity: 1;
+	.active  {
+		.card-box.cross{
+			.card-img {
+				height: 240px !important;
+				transition: all .3s ease-in-out; 
+			}
+			.card-info {
+				background: linear-gradient(rgba(0,0,0,0),rgba(74, 74, 74, 1.0));
+				.discription {
+					right: 10%;
+					opacity: 1;
+				}
 			}
 		}
 	}
+	
 	.card-box {
 		
 		border-radius: 16px;
@@ -69,7 +76,7 @@
 		overflow: hidden;
 		flex-shrink: 0;
 		margin-right: 14px;
-		image {
+		.card-img {
 			width: 100%;
 			height: 180px;
 			transition: all .3s ease-in-out; 
@@ -80,7 +87,7 @@
 		&.cross {
 			width: calc(100% - 10px);
 			margin-bottom: 10px;
-			image {
+			.card-img {
 				height: 160px;
 			}
 		}

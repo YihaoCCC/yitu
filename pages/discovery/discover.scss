@@ -31,4 +31,17 @@
 	  }
 		
 	}
+	.discover-content {
+		.image {
+			border-radius: 20px;
+			height: 640rpx;
+			width: 480rpx;
+		}
+		.swiper-image {
+			background-color: #fff;
+			border-radius: 20px;
+			width: 100%;
+			height: 50vh;
+		}
+	}
 }

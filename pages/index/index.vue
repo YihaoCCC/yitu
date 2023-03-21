@@ -40,7 +40,7 @@
 						Popular Experiences
 					</view>
 					<view class="content" >
-						<PhotoCart v-for="item in experiences" :imgUrl='item.url' :title='item.title' :place='item.place' :imgType='item.imgType'></PhotoCart>
+						<PhotoCart v-for="item in experiences" :imgUrl='item.url' :title='item.title' :place='item.place' :imgType='item.imgType' :key="item.id"></PhotoCart>
 					</view>
 			</view>
 			<view class="home-featured">
@@ -48,7 +48,7 @@
 					Featured
 				</view>
 				<view class="content" :scroll-y="true">
-					<PhotoCart  v-for="(item,index) in feature" :imgUrl='item.url' :title='item.title' :place='item.place' :imgType='item.imgType' :discription='item.discription'></PhotoCart>
+					<PhotoCart  @active = "crossExpandFun" :crossExpandId='crossExpand' :id='item._id' v-for="(item,index) in feature" :key="item.id" :imgUrl='item.url' :title='item.title' :place='item.place' :imgType='item.imgType' :discription='item.discription' ></PhotoCart>
 				</view>
 			</view>
 		</view>
@@ -66,6 +66,7 @@
 	const feature =ref([])
 	const experiences = ref([])
 	const activeType = ref(1)
+	const crossExpand = ref('123')
 	onLoad(()=> {
 		// screenHeight.value = uni.getSystemInfoSync().windowHeight;
 		// uni.hideTabBar()
@@ -93,6 +94,10 @@
 	const typeChange = (item) => {
 		activeType.value = item.id
 		
+	}
+	const crossExpandFun = (payload) => {
+		console.log(payload);
+		crossExpand.value = payload
 	}
 	
 </script>
