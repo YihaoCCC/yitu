@@ -40,7 +40,7 @@
 						Popular Experiences
 					</view>
 					<view class="content" >
-						<PhotoCart v-for="item in experiences" :imgUrl='item.url' :title='item.title' :place='item.place' :imgType='item.imgType' :key="item.id"></PhotoCart>
+						<PhotoCart v-for="item in experiences"  :key="item.id" :imgObj='item'></PhotoCart>
 					</view>
 			</view>
 			<view class="home-featured">
@@ -48,7 +48,7 @@
 					Featured
 				</view>
 				<view class="content" :scroll-y="true">
-					<PhotoCart  @active = "crossExpandFun" :crossExpandId='crossExpand' :id='item._id' v-for="(item,index) in feature" :key="item.id" :imgUrl='item.url' :title='item.title' :place='item.place' :imgType='item.imgType' :discription='item.discription' ></PhotoCart>
+					<PhotoCart  @active = "crossExpandFun" :crossExpandId='crossExpand' v-for="(item,index) in feature" :key="item.id"  :imgObj='item' ></PhotoCart>
 				</view>
 			</view>
 		</view>

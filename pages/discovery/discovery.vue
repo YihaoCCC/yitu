@@ -13,8 +13,18 @@
 		<view class="discover-content">
 			<z-swiper v-model="list" :options="options">
 				<z-swiper-item :custom-style="slideCustomStyle" v-for="(item,index) in list" :key="index">
-					<image class="image" :src="item" mode="aspectFill">
-					</image>
+					
+						<image class="image" :src="item" mode="aspectFill">
+						</image>
+						<view class="img-info">
+							<view class="img-info-title">
+								Al Masjid an Nabawi
+							</view>
+							<view class="img-info-place">
+								3 km away
+							</view>
+						</view>
+					
 				</z-swiper-item>
 			</z-swiper>
 		</view>
@@ -45,7 +55,7 @@
 		autoplay:true,
 		cardsEffect: {
 			perSlideOffset: 12,
-			perSlideRotate: 6
+			perSlideRotate: 0
 		}
 	})
 	const list = ref([

@@ -1,16 +1,16 @@
 <template>
-	<view :class="crossExpandId === id ? 'active':''">
-		<view class="card-box" :class="imgType === 'vertical' ? 'vertical' : 'cross' " @click="test">
-			<image class="card-img" :src="imgUrl" mode="aspectFill"></image>
+	<view :class="crossExpandId === imgObj._id ? 'active':''">
+		<view class="card-box" :class="imgObj.imgType === 'vertical' ? 'vertical' : 'cross' " @click="handleClick">
+			<image class="card-img" :src="imgObj.url" mode="aspectFill"></image>
 			<view class="card-info">
 				<view class="title">
-					{{title}}
+					{{ imgObj.title }}
 				</view>
 				<view class="place">
-					{{place}}
+					{{ imgObj.place }}
 				</view>
-				<view class="discription" v-if="imgType === 'cross'">
-					{{discription}}
+				<view class="discription" v-if="imgObj.imgType === 'cross'">
+					{{ imgObj.discription }}
 				</view>
 			</view>
 		</view>
@@ -20,33 +20,21 @@
 <script setup>
 	import { ref } from 'vue'
 	const emit =defineEmits(['active'])
-	const props = defineProps({		
-		imgUrl: {
-			type: String,
-			required: true
+	const props = defineProps({	
+		imgObj: {
+			type: Object,
+			default: () => []
 		},
-		title: {
-			type: String,
-			required: true
-		},
-		place: {
-			type: String,
-			required: true
-		},
-		imgType: {
-			type: String,
-			default: 'vertical'
-		},
-		discription: {
-			type: String,
-			default: '这是一段描述'
-		},
-		id: String,
 		crossExpandId: String
 	})
-	const test = () => {
-		console.log(props.id);
-		emit('active', props.id)
+	const handleClick = () => {
+		if(props.imgObj.imgType === 'cross')  {
+			emit('active', props.imgObj._id)
+		} else {
+			uni.navigateTo({
+				url: `/subPackage/detail/detail?type=${props.imgObj.type}`
+			})
+		}
 	}
 	
 </script>
@@ -54,9 +42,9 @@
 <style lang="scss" scoped>
 	.active  {
 		.card-box.cross{
+			height: 240px;
 			.card-img {
-				height: 240px !important;
-				transition: all .3s ease-in-out; 
+				transition: all .3s ease-in-out;
 			}
 			.card-info {
 				background: linear-gradient(rgba(0,0,0,0),rgba(74, 74, 74, 1.0));
@@ -69,12 +57,10 @@
 	}
 	
 	.card-box {
-		
 		border-radius: 16px;
 		box-shadow: 0px 0px 10px #f8f8f8;
 		position: relative;
 		overflow: hidden;
-		flex-shrink: 0;
 		margin-right: 14px;
 		.card-img {
 			width: 100%;
@@ -87,8 +73,9 @@
 		&.cross {
 			width: calc(100% - 10px);
 			margin-bottom: 10px;
+			height: 160px;
 			.card-img {
-				height: 160px;
+				height: 100%;
 			}
 		}
 		.card-info {
@@ -105,7 +92,6 @@
 			.title {
 				width: 100%;
 				white-space: nowrap;
-				overflow: hidden;
 				text-overflow: ellipsis;
 			}
 			.place {

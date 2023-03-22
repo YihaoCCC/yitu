@@ -47,7 +47,7 @@
 	}, {
 		"path": "pages/calendar/calendar",
 		"style": {
-			"navigationBarTitleText": "",
+			"navigationBarTitleText": "Calendar",
 			"enablePullDownRefresh": false
 		}
 
@@ -58,6 +58,18 @@
 			"enablePullDownRefresh": false
 		}
 
+	}],
+	"subPackages": [{
+		"root": "subPackage",
+		"pages": [{
+			"path": "detail/detail",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleView": false
+				}
+			}
+		}]
 	}],
 	"globalStyle": {
 		"navigationBarBackgroundColor": "#ffffff",

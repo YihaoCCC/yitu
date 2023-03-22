@@ -1,4 +1,7 @@
 .discover {
+	 font-family: Helvetica;
+	overflow: hidden;
+	overflow-y: hidden;
 	padding: 32px;
 	box-sizing: border-box;
 	.discover-title {
@@ -32,10 +35,47 @@
 		
 	}
 	.discover-content {
+		
+		.swiper-wrapper {
+			.image {
+				border-radius: 20px;
+				height: 60vh;
+				width: 90%;
+			}
+			.img-info {
+				padding: 20px 40px;
+				box-sizing: border-box;
+				color: #fff;
+				border-radius: 20px;
+				position: absolute;
+				width: 90%;
+				transform: translateX(6%);
+				bottom: 0;
+				height: 80px;
+				left: 0;
+				background: linear-gradient(rgba(0,0,0,0),rgba(32, 32, 32, 1.0));;
+				.img-info-title {
+					font-family: Poppins;
+					font-size: 18px;
+					font-weight: 500;
+					line-height: 24px;
+				}
+				.img-info-place {
+					color: #8c8c8c;
+					font-size: 14px;
+					line-height: 16px;
+				}
+			}
+			.swiper-slide-active {
+				position: relative;
+				
+				
+			}
+		}
 		.image {
 			border-radius: 20px;
-			height: 640rpx;
-			width: 480rpx;
+			height: 60vh;
+			width: 90%;
 		}
 		.swiper-image {
 			background-color: #fff;
