@@ -39,24 +39,37 @@
 	}, {
 		"path": "pages/location/location",
 		"style": {
-			"navigationBarTitleText": "",
-			"enablePullDownRefresh": false
+			"navigationBarTitleText": "Location",
+			"enablePullDownRefresh": false,
+			"navigationBarTextStyle": "black"
 		}
 
 	}, {
 		"path": "pages/calendar/calendar",
 		"style": {
-			"navigationBarTitleText": "",
+			"navigationBarTitleText": "Calendar",
 			"enablePullDownRefresh": false
 		}
 
 	}, {
 		"path": "pages/discovery/discovery",
 		"style": {
-			"navigationBarTitleText": "",
+			"navigationBarTitleText": "Discovery",
 			"enablePullDownRefresh": false
 		}
 
+	}],
+	"subPackages": [{
+		"root": "subPackage",
+		"pages": [{
+			"path": "detail/detail",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleView": false
+				}
+			}
+		}]
 	}],
 	"globalStyle": {
 		"navigationBarBackgroundColor": "#ffffff",

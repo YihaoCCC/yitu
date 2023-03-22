@@ -1,49 +1,82 @@
 <template>
-	<view class="card-box">
-		<image :src="imgUrl" mode=""></image>
-		<view class="card-info">
-			<view class="title">
-				{{title}}
-			</view>
-			<view class="place">
-				{{place}}
+	<view :class="crossExpandId === imgObj._id ? 'active':''">
+		<view class="card-box" :class="imgObj.imgType === 'vertical' ? 'vertical' : 'cross' " @click="handleClick">
+			<image class="card-img" :src="imgObj.url" mode="aspectFill"></image>
+			<view class="card-info">
+				<view class="title">
+					{{ imgObj.title }}
+				</view>
+				<view class="place">
+					{{ imgObj.place }}
+				</view>
+				<view class="discription" v-if="imgObj.imgType === 'cross'">
+					{{ imgObj.discription }}
+				</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script setup>
-	defineProps({		
-		imgUrl: {
-			type: String,
-			required: true
+	import { ref } from 'vue'
+	const emit =defineEmits(['active'])
+	const props = defineProps({	
+		imgObj: {
+			type: Object,
+			default: () => []
 		},
-		title: {
-			type: String,
-			required: true
-		},
-		place: {
-			type: String,
-			required: true
-		}
-			
-		
+		crossExpandId: String
 	})
+	const handleClick = () => {
+		if(props.imgObj.imgType === 'cross')  {
+			emit('active', props.imgObj._id)
+		} else {
+			uni.navigateTo({
+				url: `/subPackage/detail/detail?type=${props.imgObj.type}`
+			})
+		}
+	}
+	
 </script>
 
 <style lang="scss" scoped>
+	.active  {
+		.card-box.cross{
+			height: 240px;
+			.card-img {
+				transition: all .3s ease-in-out;
+			}
+			.card-info {
+				background: linear-gradient(rgba(0,0,0,0),rgba(74, 74, 74, 1.0));
+				.discription {
+					right: 10%;
+					opacity: 1;
+				}
+			}
+		}
+	}
+	
 	.card-box {
-		width: 142px;
-		height: 180px;
 		border-radius: 16px;
 		box-shadow: 0px 0px 10px #f8f8f8;
 		position: relative;
 		overflow: hidden;
-		flex-shrink: 0;
 		margin-right: 14px;
-		image {
+		.card-img {
 			width: 100%;
-			height: 100%;
+			height: 180px;
+			transition: all .3s ease-in-out; 
+		}
+		&.vertical {
+			width: 142px;
+		}
+		&.cross {
+			width: calc(100% - 10px);
+			margin-bottom: 10px;
+			height: 160px;
+			.card-img {
+				height: 100%;
+			}
 		}
 		.card-info {
 			position: absolute;
@@ -51,7 +84,7 @@
 			left: 0;
 			width: 100%;
 			height: 60px;
-			background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,1));
+			background: linear-gradient(rgba(0,0,0,0),rgba(20, 20, 20, 1.0));
 			font-size: 14px;
 			color: #fff;
 			padding: 10px 0 0 15px;
@@ -59,13 +92,19 @@
 			.title {
 				width: 100%;
 				white-space: nowrap;
-				overflow: hidden;
 				text-overflow: ellipsis;
 			}
 			.place {
 				margin-top: 5px;
 				font-size: 12px;
 				color: #afafaf;
+			}
+			.discription {
+				position: absolute;
+				right: -100%;
+				bottom: 32%;
+				opacity: 0;
+				transition: all .3s cubic-bezier(0,1,0.95,1.05); 
 			}
 		}	
 	}

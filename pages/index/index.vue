@@ -26,50 +26,58 @@
 					</view>
 				</view>
 				<view class="avtar">
-					<image src="../../static/index-bg.png" mode=""></image>
+					<image src="../../static/avtar.jpg" mode=""></image>
 				</view>
 			</view>
-			<view class="">
-				周日工作内容！！！
-				tabbar 切换
-				https 和 showtost组件封装
-			</view>
+			<view class="home-type-change">
+				<view v-for="(item,index) in photoTypeData" :key="item.id" class="type-item"
+				:class="activeType === item.id ? 'active' : ''" @click="typeChange(item)">
+					{{item.type}}
+				</view>
+			</view>	
 			<view class="home-experiences">
-				
-					<template v-for="item in experiences">
-						<PhotoCart :imgUrl='item.url' :title='item.title' :place='item.place'></PhotoCart>
-					</template>
-				
+					<view class="content-title">
+						Popular Experiences
+					</view>
+					<view class="content" >
+						<PhotoCart v-for="item in experiences"  :key="item.id" :imgObj='item'></PhotoCart>
+					</view>
+			</view>
+			<view class="home-featured">
+				<view class="content-title">
+					Featured
+				</view>
+				<view class="content" :scroll-y="true">
+					<PhotoCart  @active = "crossExpandFun" :crossExpandId='crossExpand' v-for="(item,index) in feature" :key="item.id"  :imgObj='item' ></PhotoCart>
+				</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script setup>
-	import {
-		onLoad,
-		onShow
-	} from "@dcloudio/uni-app";
-	import {
-	ref,
-	computed,
-	onMounted,
-	} from 'vue'; 
+	import { onLoad, onShow } from "@dcloudio/uni-app";
+	import { ref, computed, onMounted, } from 'vue'; 
 	import PhotoCart from '../../component/PhotoCart.vue'
+	import { photoType as photoTypeData} from '../../utils/publicData/index-type'
 	const name=ref('cyh') 
-	const screenHeight=ref('') 
+	// const screenHeight=ref('') 
 	const goHome = ref(false)
-	const testData =ref('')
+	const feature =ref([])
 	const experiences = ref([])
+	const activeType = ref(1)
+	const crossExpand = ref('123')
 	onLoad(()=> {
-		screenHeight.value = uni.getSystemInfoSync().windowHeight;
-		uni.hideTabBar()
+		// screenHeight.value = uni.getSystemInfoSync().windowHeight;
+		// uni.hideTabBar()
 		
-		})
+	})
 	onMounted(() => {
-		uni.yhHttp.get('/get_all_photos').then(res => {
-			testData.value = res.data.data[0].discription
-			experiences.value = res.data.data
+		uni.yhHttp.get('/get_all_photos', { imgType: "vertical" }).then(res => {
+			experiences.value = res.data.data.sort(function(){return Math.random()>0.5?-1:1;})
+		})
+		uni.yhHttp.get('/get_all_photos', { imgType: 'cross' }).then(res => {
+			feature.value = res.data.data.sort(function(){return Math.random()>0.5?-1:1;})
 		})
 	})
 	const showHomePage = () => {
@@ -82,8 +90,16 @@
 				frontColor: '#000000'
 			})
 		}, 800)
-
 	}
+	const typeChange = (item) => {
+		activeType.value = item.id
+		
+	}
+	const crossExpandFun = (payload) => {
+		console.log(payload);
+		crossExpand.value = payload
+	}
+	
 </script>
 
 <style lang="scss" scoped>
