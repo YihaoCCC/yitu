@@ -7,6 +7,7 @@
 					{{ imgObj.title }}
 				</view>
 				<view class="place">
+					<uni-icons type="location" size="14"></uni-icons>
 					{{ imgObj.place }}
 				</view>
 				<view class="discription" v-if="imgObj.imgType === 'cross'">
@@ -42,7 +43,7 @@
 <style lang="scss" scoped>
 	.active  {
 		.card-box.cross{
-			height: 240px;
+			height: 280px;
 			.card-img {
 				transition: all .3s ease-in-out;
 			}
@@ -62,10 +63,11 @@
 		position: relative;
 		overflow: hidden;
 		margin-right: 14px;
+		transition: all .3s ease-in-out; 
+		height: 190px;
 		.card-img {
 			width: 100%;
-			height: 180px;
-			transition: all .3s ease-in-out; 
+			height: 100%;
 		}
 		&.vertical {
 			width: 142px;
@@ -93,11 +95,18 @@
 				width: 100%;
 				white-space: nowrap;
 				text-overflow: ellipsis;
+				overflow: hidden;
 			}
 			.place {
 				margin-top: 5px;
 				font-size: 12px;
 				color: #afafaf;
+				display: flex;
+				align-items: center;
+				.uni-icons {
+					margin-right: 4px;
+					color: #cccccc !important;
+				}
 			}
 			.discription {
 				position: absolute;

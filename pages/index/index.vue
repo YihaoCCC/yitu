@@ -65,7 +65,7 @@
 	const goHome = ref(false)
 	const feature =ref([])
 	const experiences = ref([])
-	const activeType = ref(1)
+	const activeType = ref(100)
 	const crossExpand = ref('123')
 	onLoad(()=> {
 		// screenHeight.value = uni.getSystemInfoSync().windowHeight;

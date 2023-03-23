@@ -1,8 +1,7 @@
 .discover {
-	 font-family: Helvetica;
+	font-family: Helvetica;
 	overflow: hidden;
-	overflow-y: hidden;
-	padding: 32px;
+	padding: 24px;
 	box-sizing: border-box;
 	.discover-title {
 		display: flex;
@@ -35,12 +34,11 @@
 		
 	}
 	.discover-content {
-		
 		.swiper-wrapper {
 			.image {
 				border-radius: 20px;
-				height: 60vh;
-				width: 90%;
+				height: 70vh;
+				width: 100%;
 			}
 			.img-info {
 				padding: 20px 40px;
@@ -48,8 +46,7 @@
 				color: #fff;
 				border-radius: 20px;
 				position: absolute;
-				width: 90%;
-				transform: translateX(6%);
+				width: 100%;
 				bottom: 0;
 				height: 80px;
 				left: 0;

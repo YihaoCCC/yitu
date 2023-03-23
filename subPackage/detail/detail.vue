@@ -1,6 +1,6 @@
 <template>
 	<view class="container" :style="{height:screenHeight+'px'}">
-	    <view class="detail" :class="showFade ? 'fadeOut' : ''">
+	    <view class="detail" :class="showFade ? 'fadeOut' : ''" @touchstart="start" @touchend="end">
 	      <image class="image" :src="currentImg.url" mode="aspectFill"></image>
 	    </view>
 	    <view class="place" :style="{top: `${top}px`, left: `${left}px`}">
@@ -35,6 +35,7 @@
 	const left = ref()
 	const top = ref()
 	const list = ref([])
+	const clientX = ref()
 	onLoad((option) => {
 		console.log(option);
 		screenHeight.value = uni.getSystemInfoSync().windowHeight;
@@ -58,7 +59,7 @@
 			currentImgNum.value++
 			top.value = (uni.getSystemInfoSync().windowHeight - 370) * Math.random()
 			left.value = (uni.getSystemInfoSync().windowWidth - 180) * Math.random()
-		},600)
+		},800)
 	}
 	const currentImg = computed(() => {
 		if(list.value.length) {
@@ -74,6 +75,22 @@
 	const close = () => {
 		 uni.navigateBack()
 	}
+	
+	const start = (e) => {
+		clientX.value = e.changedTouches[0].clientX;             
+	}
+	const end = (e) => {
+		const subX = e.changedTouches[0].clientX - clientX.value;
+		if( subX > 50){
+			console.log('右滑')
+			change()
+		}else if( subX < -50){
+			console.log('左滑')
+			change()
+		}else{
+			console.log('无效')
+		}
+}
   </script>
 
 <style lang="scss" scoped>
@@ -87,14 +104,15 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
-			animation: fadeIn .6s ease-in-out;
+			animation: fadeIn .5s ease-in-out;
 			.image {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
 			}
 			&.fadeOut {
-				animation: fadeOut .6s ease-in-out;
+				animation: fadeOut .8s ease-in-out forwards;
+				animation-delay: .15s;
 			}
 			@keyframes fadeIn {
 				0% {
@@ -150,6 +168,8 @@
 				transform: translateX(20%);
 				top: 50%;
 				color: #f8f8f8;
+				display: flex;
+				align-items: center;
 				text {
 					margin-left: 6px;
 				}
@@ -186,6 +206,7 @@
 					background-color: #fff;
 					bottom: -30px;
 					left: -9px;
+					box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 					&::before {
 						display: block;
 						position: absolute;
@@ -196,7 +217,8 @@
 						width: 40px;
 						height: 40px;
 						border-radius: 50%;
-						background: rgba(255, 255, 255, 0.2);
+						z-index: -1;
+						background: transparent;
 						backdrop-filter: blur(8px);
 						border: 2px solid rgba(255, 255, 255, 0.3);
 						box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
@@ -209,7 +231,7 @@
 			position: absolute;
 			top: 6%;
 			left: 8%;
-			padding: 10px;
+			padding: 8px 10px;
 			box-sizing: border-box;
 		    background: rgba(255, 255, 255, 0.2);
 			border-radius: 50%;
