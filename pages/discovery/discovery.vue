@@ -1,5 +1,4 @@
 <template>
-
 		<view class="discover">
 			<view class="discover-title">
 				<text>Discover</text>

@@ -3,7 +3,8 @@
 		<view class="welcomePage" style="100vh" 
 		:class="goHome ? 'goHome' : '' " >
 			<view class="title">
-				Explore and discover new vistas
+				Forgot Busy Work
+				Start Next Vacation
 			</view>
 			<text>
 				Browse through a large number of interesting travel albums and choose some locations for yourself. 
@@ -52,6 +53,7 @@
 				</view>
 			</view>
 		</view>
+	
 	</view>
 </template>
 
@@ -61,6 +63,7 @@
 	import PhotoCart from '../../component/PhotoCart.vue'
 	import { photoType as photoTypeData} from '../../utils/publicData/index-type'
 	const name=ref('cyh') 
+
 	// const screenHeight=ref('') 
 	const goHome = ref(false)
 	const feature =ref([])
@@ -72,15 +75,15 @@
 		uni.hideTabBar()
 	})
 	onMounted(() => {
-		uni.yhHttp.get('/get_all_photos', { imgType: "vertical" }).then(res => {
+		uni.yhHttp.get('/fun/get_all_photos', { imgType: "vertical" }).then(res => {
 			experiences.value = res.data.data.sort(function(){return Math.random()>0.5?-1:1;})
 		})
-		uni.yhHttp.get('/get_all_photos', { imgType: 'cross' }).then(res => {
+		uni.yhHttp.get('/fun/get_all_photos', { imgType: 'cross' }).then(res => {
 			feature.value = res.data.data.sort(function(){return Math.random()>0.5?-1:1;})
 		})
 	})
 	const showHomePage = () => {
-		uni.showTabBar()
+		
 		goHome.value = true
 		setTimeout(() => {
 			uni.setNavigationBarColor({
@@ -88,7 +91,9 @@
 				animation: { duration: 800, timingFunc: 'linear' },
 				frontColor: '#000000'
 			})
+			uni.showTabBar()
 		}, 800)
+	
 	}
 	const typeChange = (item) => {
 		activeType.value = item.id
