@@ -41,7 +41,12 @@
 		"style": {
 			"navigationBarTitleText": "Location",
 			"enablePullDownRefresh": false,
-			"navigationBarTextStyle": "black"
+			"disableScroll": true,
+			"navigationStyle": "custom",
+			"app-plus": {
+				"bounce": "none",
+				"titleView": false
+			}
 		}
 
 	}, {

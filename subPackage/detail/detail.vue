@@ -6,9 +6,7 @@
 	    <view class="place" :style="{top: `${top}px`, left: `${left}px`}">
 			{{currentImg.place}}
 	      <view class="line">
-	        <view class="circle">
-	
-	        </view>
+	        <view class="circle"></view>
 	      </view>
 	    </view>
 	    <view class="bottom-info" @click="change">

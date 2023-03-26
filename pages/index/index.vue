@@ -69,8 +69,7 @@
 	const crossExpand = ref('123')
 	onLoad(()=> {
 		// screenHeight.value = uni.getSystemInfoSync().windowHeight;
-		// uni.hideTabBar()
-		
+		uni.hideTabBar()
 	})
 	onMounted(() => {
 		uni.yhHttp.get('/get_all_photos', { imgType: "vertical" }).then(res => {

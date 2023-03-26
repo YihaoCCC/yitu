@@ -7,7 +7,7 @@
 					{{ imgObj.title }}
 				</view>
 				<view class="place">
-					<uni-icons type="location" size="14"></uni-icons>
+					<uni-icons type="location" size="14" color="#d3d3d3" style="margin-right: 4px;" ></uni-icons>
 					{{ imgObj.place }}
 				</view>
 				<view class="discription" v-if="imgObj.imgType === 'cross'">
@@ -103,10 +103,6 @@
 				color: #afafaf;
 				display: flex;
 				align-items: center;
-				.uni-icons {
-					margin-right: 4px;
-					color: #cccccc !important;
-				}
 			}
 			.discription {
 				position: absolute;

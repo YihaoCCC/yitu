@@ -1,0 +1,119 @@
+.location {
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+	color: #fff;
+	.location-img-box {
+		height: 100%;
+		transition: all .4s ease-in-out;
+		.img {
+			height: 100%;
+			width: 100%;
+		}
+	}
+	.location-info {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 40vh;
+	
+		border-top-left-radius: 30px;
+		border-top-right-radius: 30px;
+		backdrop-filter: blur(8px);
+		background: rgba(255, 255, 255, 0.2);
+		padding: 30px 20px 5px 20px;
+		box-sizing: border-box;
+		border: 2px solid rgba(255, 255, 255, 0.2);
+		box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+		.location-info-header {
+			.title {
+				font-size: 24px;
+				font-weight: 900;
+			}
+			.place {
+				display: flex;
+				align-items: center;
+				font-size: 12px;
+				margin: 8px 0;
+			
+			}
+			
+		}
+		.description {
+			font-size: 20px;
+			font-weight: 700px;
+			position: absolute;
+			bottom: 22%;
+			left: 20px;
+			.content {
+				font-size: 14px;
+				margin: 10px 0 20px 0;
+			}
+		}
+		
+		.buttons {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			position: absolute;
+			bottom: 8%;
+			left: 0;
+			width: 100%;
+			height: 15%;
+			button {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+				font-family: inherit;
+				font-size: 13px;
+				font-weight: 500;
+				text-transform: uppercase;
+				letter-spacing: 0.4px;
+				color: var(--theme-color);
+				background-color: #e0e8ef;
+				border-style: solid;
+				border-width: 2px 2px 2px 2px;
+				border-color: rgba(255, 255, 255, 0.333);
+				border-radius: 40px;
+				padding: 4px 20px;
+				transition: 0.2s;
+				box-shadow: -4px -2px 16px 0px #ffffff, 4px 2px 16px 0px rgb(95 157 231 / 48%);
+			}
+			
+			button:hover {
+			 color: #516d91;
+			 background-color: #E5EDF5;
+			 box-shadow: -2px -1px 8px 0px #ffffff, 2px 1px 8px 0px rgb(95 157 231 / 48%);
+			}
+			
+			button:active {
+				box-shadow: none;
+			}
+			.explore {
+				width: 50%;
+			}
+			.button_next {
+				background: transparent !important;
+				color: #fff !important;
+				box-shadow:  0px 0px 4px #ffffff;
+			}
+		}
+		.little_image {
+			position: absolute;
+			top: 30px;
+			right: 30px;
+			border-radius: 20px;
+			width: 45%;
+			height: 39%;
+			overflow: hidden;
+			box-shadow: 0px 0px 8px 0px #ffffff;
+			transition: all .3s ease-in-out; 
+			image  {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+}
