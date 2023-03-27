@@ -12,6 +12,6 @@ $http.afterRequest = function (res) {
   uni.hideLoading()
 }
 
-$http.baseUrl = 'https://fc-mp-3063b247-015d-4a4e-af76-296e5a85e6a4.next.bspapp.com/fun'
+$http.baseUrl = 'https://fc-mp-3063b247-015d-4a4e-af76-296e5a85e6a4.next.bspapp.com'
 
 export default $http

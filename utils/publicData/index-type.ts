@@ -5,6 +5,10 @@ interface PhotoType {
 
 export const photoType:PhotoType[] = [
 		{
+			id: 100,
+			type: 'All',
+		},
+		{
 			id: 1,
 			type: 'Sky',
 		},

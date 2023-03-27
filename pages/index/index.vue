@@ -3,7 +3,8 @@
 		<view class="welcomePage" style="100vh" 
 		:class="goHome ? 'goHome' : '' " >
 			<view class="title">
-				Explore and discover new vistas
+				Forgot Busy Work
+				Start Next Vacation
 			</view>
 			<text>
 				Browse through a large number of interesting travel albums and choose some locations for yourself. 
@@ -45,13 +46,21 @@
 			</view>
 			<view class="home-featured">
 				<view class="content-title">
-					Featured
+					<text>Featured</text>
+					<view class="more">
+						More
+						<uni-icons type="arrow-right" size="10"></uni-icons>
+					</view>
 				</view>
 				<view class="content" :scroll-y="true">
 					<PhotoCart  @active = "crossExpandFun" :crossExpandId='crossExpand' v-for="(item,index) in feature" :key="item.id"  :imgObj='item' ></PhotoCart>
 				</view>
 			</view>
 		</view>
+		<uni-popup ref="popup" type="message">
+			<uni-popup-message type="warn" message="图片数量较少,请优先体验功能!" :duration="600"></uni-popup-message>
+		
+		</uni-popup>
 	</view>
 </template>
 
@@ -61,27 +70,27 @@
 	import PhotoCart from '../../component/PhotoCart.vue'
 	import { photoType as photoTypeData} from '../../utils/publicData/index-type'
 	const name=ref('cyh') 
+	const popup = ref(null);
 	// const screenHeight=ref('') 
 	const goHome = ref(false)
 	const feature =ref([])
 	const experiences = ref([])
-	const activeType = ref(1)
+	const activeType = ref(100)
 	const crossExpand = ref('123')
 	onLoad(()=> {
 		// screenHeight.value = uni.getSystemInfoSync().windowHeight;
-		// uni.hideTabBar()
-		
+		uni.hideTabBar()
 	})
 	onMounted(() => {
-		uni.yhHttp.get('/get_all_photos', { imgType: "vertical" }).then(res => {
+		uni.yhHttp.get('/fun/get_all_photos', { imgType: "vertical" }).then(res => {
 			experiences.value = res.data.data.sort(function(){return Math.random()>0.5?-1:1;})
 		})
-		uni.yhHttp.get('/get_all_photos', { imgType: 'cross' }).then(res => {
+		uni.yhHttp.get('/fun/get_all_photos', { imgType: 'cross' }).then(res => {
 			feature.value = res.data.data.sort(function(){return Math.random()>0.5?-1:1;})
 		})
 	})
 	const showHomePage = () => {
-		uni.showTabBar()
+		
 		goHome.value = true
 		setTimeout(() => {
 			uni.setNavigationBarColor({
@@ -89,10 +98,15 @@
 				animation: { duration: 800, timingFunc: 'linear' },
 				frontColor: '#000000'
 			})
+			uni.showTabBar()
 		}, 800)
+		setTimeout(() => {
+			popup.value.open()
+		}, 2000)
 	}
 	const typeChange = (item) => {
 		activeType.value = item.id
+		popup.value.open()
 		
 	}
 	const crossExpandFun = (payload) => {

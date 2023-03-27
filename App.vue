@@ -2,7 +2,7 @@
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
-			uni.hideTabBar()
+			
 		},
 		onShow: function() {
 			console.log('App Show')
@@ -34,5 +34,16 @@
 	.uni-tabbar {
 		border-top-left-radius: 15px;
 		border-top-right-radius: 15px;
+	}
+	view ::-webkit-scrollbar {  
+		display: none !important;  
+		width: 0 !important;  
+		height: 0 !important;  
+		-webkit-appearance: none;  
+		background: transparent;  
+	}
+	//第二种
+	::-webkit-scrollbar{
+		  display: none;
 	}
 </style>

@@ -32,7 +32,7 @@
 		"path": "pages/index/index",
 		"style": {
 			"navigationBarBackgroundColor": "#00395f",
-			"navigationBarTitleText": "奕·图",
+			"navigationBarTitleText": "一图",
 			"navigationBarTextStyle": "white"
 			
 		}
@@ -41,7 +41,12 @@
 		"style": {
 			"navigationBarTitleText": "Location",
 			"enablePullDownRefresh": false,
-			"navigationBarTextStyle": "black"
+			"disableScroll": true,
+			"navigationStyle": "custom",
+			"app-plus": {
+				"bounce": "none",
+				"titleView": false
+			}
 		}
 
 	}, {
@@ -55,7 +60,11 @@
 		"path": "pages/discovery/discovery",
 		"style": {
 			"navigationBarTitleText": "Discovery",
-			"enablePullDownRefresh": false
+			"enablePullDownRefresh": false,
+			"disableScroll": true,
+			"app-plus": {
+				"bounce": "none"
+			}
 		}
 
 	}],
