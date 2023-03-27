@@ -37,7 +37,7 @@
 	onLoad((option) => {
 		console.log(option);
 		screenHeight.value = uni.getSystemInfoSync().windowHeight;
-		uni.yhHttp.get('/get_all_photos', { imgType: "vertical", type: option.type }).then(res => {
+		uni.yhHttp.get('/fun/get_all_photos', { imgType: "vertical", type: option.type }).then(res => {
 			list.value = res.data.data
 			// currentImg.value = list.value[0].url
 			

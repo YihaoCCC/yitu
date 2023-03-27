@@ -46,14 +46,21 @@
 			</view>
 			<view class="home-featured">
 				<view class="content-title">
-					Featured
+					<text>Featured</text>
+					<view class="more">
+						More
+						<uni-icons type="arrow-right" size="10"></uni-icons>
+					</view>
 				</view>
 				<view class="content" :scroll-y="true">
 					<PhotoCart  @active = "crossExpandFun" :crossExpandId='crossExpand' v-for="(item,index) in feature" :key="item.id"  :imgObj='item' ></PhotoCart>
 				</view>
 			</view>
 		</view>
-	
+		<uni-popup ref="popup" type="message">
+			<uni-popup-message type="warn" message="图片数量较少,请优先体验功能!" :duration="600"></uni-popup-message>
+		
+		</uni-popup>
 	</view>
 </template>
 
@@ -63,7 +70,7 @@
 	import PhotoCart from '../../component/PhotoCart.vue'
 	import { photoType as photoTypeData} from '../../utils/publicData/index-type'
 	const name=ref('cyh') 
-
+	const popup = ref(null);
 	// const screenHeight=ref('') 
 	const goHome = ref(false)
 	const feature =ref([])
@@ -93,10 +100,13 @@
 			})
 			uni.showTabBar()
 		}, 800)
-	
+		setTimeout(() => {
+			popup.value.open()
+		}, 2000)
 	}
 	const typeChange = (item) => {
 		activeType.value = item.id
+		popup.value.open()
 		
 	}
 	const crossExpandFun = (payload) => {
