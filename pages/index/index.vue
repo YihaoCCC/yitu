@@ -52,9 +52,9 @@
 						<uni-icons type="arrow-right" size="10"></uni-icons>
 					</view>
 				</view>
-				<view class="content" :scroll-y="true">
+				<scroll-view class="content" :scroll-y="true">
 					<PhotoCart  @active = "crossExpandFun" :crossExpandId='crossExpand' v-for="(item,index) in feature" :key="item.id"  :imgObj='item' ></PhotoCart>
-				</view>
+				</scroll-view>
 			</view>
 		</view>
 		<uni-popup ref="popup" type="message">
