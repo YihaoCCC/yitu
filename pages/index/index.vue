@@ -16,7 +16,7 @@
 				Get Started
 			</button>
 		</view>
-		<view class="home">
+		<scroll-view class="home" :scroll-y="true">
 			<view class="home-header">
 				<view class="header-title">
 					<view class="name">
@@ -36,27 +36,30 @@
 					{{item.type}}
 				</view>
 			</view>	
+			<view class="content-title">
+				Popular Experiences
+			</view>
 			<view class="home-experiences">
-					<view class="content-title">
-						Popular Experiences
-					</view>
+					
 					<view class="content" >
 						<PhotoCart v-for="item in experiences"  :key="item.id" :imgObj='item'></PhotoCart>
 					</view>
 			</view>
-			<view class="home-featured">
-				<view class="content-title">
-					<text>Featured</text>
-					<view class="more">
-						More
-						<uni-icons type="arrow-right" size="10"></uni-icons>
-					</view>
+			<view class="content-title">
+				<text>Featured</text>
+				<view class="more">
+					More
+					<uni-icons type="arrow-right" size="20"></uni-icons>
 				</view>
-				<scroll-view class="content" :scroll-y="true">
-					<PhotoCart  @active = "crossExpandFun" :crossExpandId='crossExpand' v-for="(item,index) in feature" :key="item.id"  :imgObj='item' ></PhotoCart>
-				</scroll-view>
 			</view>
-		</view>
+			<view class="content" >
+				<PhotoCart  @active = "crossExpandFun" :crossExpandId='crossExpand' v-for="(item,index) in feature" :key="item.id"  :imgObj='item' ></PhotoCart>
+			</view>
+			<view class="home-featured">
+				
+				
+			</view>
+		</scroll-view>
 		<uni-popup ref="popup" type="message">
 			<uni-popup-message type="warn" message="图片数量较少,请优先体验功能!" :duration="600"></uni-popup-message>
 		

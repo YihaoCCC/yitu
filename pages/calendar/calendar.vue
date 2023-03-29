@@ -1,11 +1,20 @@
 <template>
 	<view class="calendar">
 		<view class="calendar-title">
+			<uni-icons type="calendar" size="32" color="var(--theme-color)"></uni-icons>
+			
 			Trip Plan
 		</view>
-		<view class="calendar-content">
-			<photo-card v-for="(item,index) in 5" :key="index" :calendar='true'></photo-card>
-		</view>
+		
+		<scroll-view class="calendar-content" :scroll-y="true">
+			<view class="calendar-date">
+				2023年 3月 
+			</view>
+			<view class="calendar-item" v-for="(item,index) in 5" :key="index">
+				<photo-card  :calendar='true'></photo-card>
+			</view>
+			
+		</scroll-view>
 	</view>
 </template>
 

@@ -159,7 +159,7 @@
 	}
 	.calendar-card {
 		width: 100%;
-		height: 169px;
+		height: 220px;
 		border-radius: 16px;
 		overflow: hidden;
 		position: relative;
