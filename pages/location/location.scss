@@ -94,6 +94,58 @@
 					}
 				}
 			}
+			.guide {
+				transform: rotate(-90deg);
+				position: absolute;
+				top: 50%;
+				right: 18%;
+			}
+			.arrow:after, .arrow:before {
+				background: #fff;
+				content: "";
+				display: block;
+				height: 2px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 9px;
+				box-shadow: 1px 1px 20px 0 #fff;
+			}
+			.arrow:before {
+				transform: rotate(45deg) translateX(-11%);
+				transform-origin: top left;
+			}
+			.arrow:after {
+				transform: rotate(-45deg) translateX(9%);
+				transform-origin: top right;
+			}
+			.arrow-1 {
+				animation: arrow-movement 3s ease-in-out infinite;
+			}
+			.arrow-2 {
+				animation: arrow-movement 3s 1s ease-in-out infinite;
+			}
+			.arrow-3 {
+				animation: arrow-movement 3s 2s ease-in-out infinite;
+			}
+			.arrow {
+				position: absolute;
+				top: 35px;
+				transform-origin: 50% 50%;
+				transform: translate3d(-50%,0,0);
+			}
+			@keyframes arrow-movement {
+			    0% {
+			        opacity: 0;
+			        top: 0;
+			    }
+			    70% {
+			        opacity: 1;
+			    }
+			    100% {
+			        opacity: 0;
+			    }
+			}
 		}
 	}
 	

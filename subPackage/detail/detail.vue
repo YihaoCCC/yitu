@@ -125,7 +125,6 @@
 				100% {
 					opacity: 0.5;
 					transform: translateX(100%);
-					
 				}
 			}
 		}
