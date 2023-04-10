@@ -7,7 +7,7 @@
 		overflow: hidden;
 	}
 	.calendar-card{
-		padding: 0 24px;
+		padding: 0 22px;
 		box-sizing: border-box;
 		width: 100%;
 		margin-bottom: 10px;
@@ -15,8 +15,7 @@
 		position: relative;
 		.date {
 			position: absolute;
-			width: calc(100% - 48px);
-		
+			width: calc(100% - 44px);
 			box-sizing: border-box;
 			top: 0;
 			background-color: rgba(1, 2, 3, 0.38);
@@ -26,12 +25,9 @@
 			align-items: center;
 			justify-content: center;
 			color: #fff;
-			text {
-				transition: transform 2s cubic-bezier(0, 1, 0.95, 1.05);		
-			}
-			.time {
-				margin-left: 5px;
-				transition: transform 2s cubic-bezier(0, 1, 0.95, 1.05);		
+			
+			.text,.calendar-icon { 
+				transition: transform 1s cubic-bezier(0, 1, 0.95, 1.05);
 			}
 		}
 		&:first-child {
@@ -43,13 +39,18 @@
 			border-radius: 16px;
 			overflow: hidden;
 		}
-		.hidden-content {
+		.content-warpper {
 			height: 0;
-			overflow: hidden;
-			transition: all 1.6s cubic-bezier(0, 1, 0.95, 1.05);
+			overflow: auto;
+			transition: height 2s cubic-bezier(0, 1, 0.95, 1.05);
+			
+			image {
+				width: 50%;
+				height: calc(100vw / 2);
+			}
 		}
 		.close {
-			position: absolute;
+			position: fixed;
 			top: 10px;
 			right: 16px;
 			border-radius: 50%;
@@ -57,6 +58,8 @@
 			padding: 5px;
 			box-sizing: border-box;
 			visibility: hidden;
+			width: 30px;
+			height: 30px;
 		}
 		&.active {
 			padding: 0;
@@ -66,9 +69,8 @@
 			.card-img {
 				border-radius: 0;
 			}
-			.hidden-content {
-				
-				height: 100vh;
+			.content-warpper {
+				height: calc(100vh - 260px);
 			}
 			.close {
 				visibility: visible;
@@ -77,13 +79,15 @@
 				background: none;
 				text-align: center;
 				width: 100%;
-				text {
+				.calendar-icon {
 					transform: translateY(-80px);
 				}
-				.time {
+				.text {
 					width: 280px;
+					margin-left: 5px;
 					transform: translateY(-80px) scale(1.2);
 				}
+				
 			}
 		}
 	}

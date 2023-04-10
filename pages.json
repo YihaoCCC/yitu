@@ -53,7 +53,12 @@
 		"path": "pages/calendar/calendar",
 		"style": {
 			"navigationBarTitleText": "Calendar",
-			"enablePullDownRefresh": false
+			"enablePullDownRefresh": false,
+			"navigationStyle": "custom",
+			"app-plus": {
+				"bounce": "none",
+				"titleView": false
+			}
 		}
 
 	}, {
