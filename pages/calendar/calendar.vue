@@ -1,8 +1,8 @@
 <template>
-	<view class="calendar" :style="{overflow: disabledScroll ? 'hidden' : 'auto'}">
+	<view class="calendar" :style="{overflow: disabledScroll ? 'hidden' : 'auto'}" >
 
 		<view class="calendar-card" :style="transform" :class="active === index ? 'active' : ''"
-			v-for="(item,index) in 5" :key="index" @click="(e) => activeCard(index, e)">
+			v-for="(item,index) in 5" :key="index" @click="(e) => activeCard(index, e)" @touchstart="start" @touchend="backClose">
 
 			<image class="card-img" src="https://cdn.zebraui.com/zebra-ui/images/swipe-demo/swipe2.jpg"
 				mode="aspectFill"></image>
@@ -58,7 +58,7 @@
 		computed,
 		reactive
 	} from 'vue';
-
+	const clientX = ref()
 	const active = ref(1000)
 	const transform = ref('')
 	const disabledScroll = ref(false)
@@ -74,11 +74,7 @@
 			let selectorQuery = uni.createSelectorQuery();
 			selectorQuery.selectAll('.calendar-card').boundingClientRect((rects) => {
 				console.log(rects);
-				if (index === 4) {
-					transform.value = `--move-height: -${rects[index].top + 50}px`
-				} else {
-					transform.value = `--move-height: -${rects[index].top}px`
-				}
+				transform.value = `--move-height: -${rects[index].top}px`
 			}).exec()
 		}
 	}
@@ -88,6 +84,26 @@
 		setTimeout(() => {
 			uni.showTabBar()
 		}, 800)
+	}
+	const start = (e) => {
+		clientX.value = e.changedTouches[0].clientX;             
+	}
+	const backClose = (e) => {
+			const subX = e.changedTouches[0].clientX - clientX.value;
+			if( subX > 50){
+				console.log('右滑')
+				active.value = 999
+				disabledScroll.value = false
+				setTimeout(() => {
+					uni.showTabBar()
+				}, 800)
+				
+			}else if( subX < -50){
+				console.log('左滑')
+				
+			}else{
+				console.log('无效')
+			}
 	}
 </script>
 

@@ -42,7 +42,7 @@
 		.content-warpper {
 			height: 0;
 			overflow: auto;
-			transition: height 2s cubic-bezier(0, 1, 0.95, 1.05);
+			transition: height 1s cubic-bezier(0, 1, 0.95, 1.05);
 			
 			image {
 				width: 50%;
@@ -51,13 +51,14 @@
 		}
 		.close {
 			position: fixed;
-			top: 10px;
+			top: 200px;
 			right: 16px;
 			border-radius: 50%;
-			background: rgba(1, 2, 3, 0.18);
+			background: rgba(255, 255, 255, 0.18);
 			padding: 5px;
 			box-sizing: border-box;
 			visibility: hidden;
+			vertical-align: middle;
 			width: 30px;
 			height: 30px;
 		}
@@ -80,12 +81,12 @@
 				text-align: center;
 				width: 100%;
 				.calendar-icon {
-					transform: translateY(-80px);
+					transform: translateY(-10px);
 				}
 				.text {
 					width: 280px;
 					margin-left: 5px;
-					transform: translateY(-80px) scale(1.2);
+					transform: translateY(-10px) scale(1.2);
 				}
 				
 			}

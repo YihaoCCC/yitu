@@ -23,7 +23,7 @@
 
 <script setup>
 	import { ref, onMounted } from 'vue'
-	const emit =defineEmits(['active'])
+	const emit =defineEmits(['active', 'goDetail'])
 	const props = defineProps({
 		calendar: {
 			type: Boolean,
@@ -47,9 +47,7 @@
 		if(props.imgObj.imgType === 'cross')  {
 			emit('active', props.imgObj._id)
 		} else {
-			uni.navigateTo({
-				url: `/subPackage/detail/detail?type=${props.imgObj.type}`
-			})
+			emit('goDetail', props.imgObj.url)
 		}
 	}
 	const onSuccessImg = () => {

@@ -150,7 +150,7 @@
 				position: absolute;
 				top: -42px;
 				left: 22px;
-				box-shadow: 0 5px 29px #232323;				
+				box-shadow: 0 5px 29px #d6d6d6;				
 			}
 			.discription {
 				position: absolute;

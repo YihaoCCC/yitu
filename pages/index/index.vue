@@ -42,7 +42,7 @@
 			<view class="home-experiences">
 					
 					<view class="content" >
-						<PhotoCart v-for="item in experiences"  :key="item.id" :imgObj='item'></PhotoCart>
+						<PhotoCart v-for="item in experiences"  :key="item.id" :imgObj='item'  @goDetail='goDetail'></PhotoCart>
 					</view>
 			</view>
 			<view class="content-title">
@@ -61,16 +61,18 @@
 			</view>
 		</scroll-view>
 		<uni-popup ref="popup" type="message">
-			<uni-popup-message type="warn" message="图片数量较少,请优先体验功能!" :duration="600"></uni-popup-message>
+			<uni-popup-message type="warn" message="图片数量较少,请优先体验功能!" :duration="2000"></uni-popup-message>
 		
 		</uni-popup>
 	</view>
+	<ModelDetail :imgUrl='detailImgUrl' v-if="showDetailModal" @close='close'></ModelDetail>
 </template>
 
 <script setup>
 	import { onLoad, onShow } from "@dcloudio/uni-app";
 	import { ref, computed, onMounted, } from 'vue'; 
 	import PhotoCart from '../../component/PhotoCart.vue'
+	import ModelDetail from '../../component/ModalDetail.vue'
 	import { photoType as photoTypeData} from '../../utils/publicData/index-type'
 	const name=ref('cyh') 
 	const popup = ref(null);
@@ -80,6 +82,8 @@
 	const experiences = ref([])
 	const activeType = ref(100)
 	const crossExpand = ref('123')
+	const detailImgUrl = ref('')
+	const showDetailModal = ref(false)
 	onLoad(()=> {
 		// screenHeight.value = uni.getSystemInfoSync().windowHeight;
 		uni.hideTabBar()
@@ -103,18 +107,32 @@
 			})
 			uni.showTabBar()
 		}, 800)
-		setTimeout(() => {
-			popup.value.open()
-		}, 2000)
 	}
 	const typeChange = (item) => {
 		activeType.value = item.id
-		popup.value.open()
-		
+		if(item.value === 'flowers' || item.value === 'building') {
+			uni.navigateTo({
+				url: `/subPackage/detail/detail?type=${item.value}`
+			})
+		} else {
+			popup.value.open()
+		}
 	}
 	const crossExpandFun = (payload) => {
 		console.log(payload);
 		crossExpand.value = payload
+	}
+	
+	const goDetail = (payload) => {
+		console.log(payload);
+		showDetailModal.value = true
+		detailImgUrl.value = payload
+	}
+	
+	const close = () => {
+		setTimeout(() => {
+			showDetailModal.value = false
+		}, 500)
 	}
 	
 </script>
