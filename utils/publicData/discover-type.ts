@@ -1,15 +1,18 @@
 interface PhotoType {
 	id: Number,
-	type: String
+	type: String,
+	value: String
 }
 
 export const discoverType:PhotoType[] = [
 		{
 			id: 1,
-			type: 'Sky',
+			type: 'Home',
+			value: 'home'
 		},
 		{
 			id: 2,
-			type: 'Architecture',
+			type: 'Foreign',
+			value: 'foreign'
 		}
 	]

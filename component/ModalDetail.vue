@@ -35,7 +35,7 @@
 		justify-content: center;
 		animation: down .5s cubic-bezier(0, 1, 0.95, 1.05) forwards;
 		&.close-model {
-			animation: up .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+			animation: up .5s ease-in-out forwards;
 		}
 		@keyframes down {
 			0% {
@@ -43,6 +43,7 @@
 				opacity: 0;
 			}
 			100% {
+				transform: translateY(0);
 				opacity: 1;
 			}
 			
@@ -61,7 +62,7 @@
 		}
 		.close {
 			position: fixed;
-			top: 130px;
+			top: 20px;
 			right: 20px;
 			background: rgba(255, 255, 255, 0.5);
 			display: flex;

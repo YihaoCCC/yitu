@@ -67,8 +67,10 @@
 			"navigationBarTitleText": "Discovery",
 			"enablePullDownRefresh": false,
 			"disableScroll": true,
+			"navigationStyle": "custom",
 			"app-plus": {
-				"bounce": "none"
+				"bounce": "none",
+				"titleView": false
 			}
 		}
 
