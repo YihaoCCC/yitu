@@ -1,6 +1,6 @@
 <template>
 		<uni-popup ref="alertDialog" type="dialog">
-			<uni-popup-dialog type="warn" cancelText="Best wishes" confirmText="Best wishes" title="Special Thanks" content="感谢远在国外的朋友为此页面做的贡献!" @confirm="dialogConfirm"
+			<uni-popup-dialog type="warn" cancelText="Best wishes" confirmText="Best wishes" title="Special Thanks" content="感谢国内外朋友为此页面做的贡献!" @confirm="dialogConfirm"
 				@close="dialogClose"></uni-popup-dialog>
 		</uni-popup>
 		<view class="discover">
@@ -15,7 +15,7 @@
 						{{item.type}}
 					</view>
 				</view>
-				<uni-icons type="paperplane" size="26"></uni-icons>
+				<uni-icons color="#031f2a" type="paperplane" size="26" @click="alertDialog.open()"></uni-icons>
 			</view>
 			<view class="discover-content">
 				<z-swiper v-model="list" :options="options">
@@ -44,11 +44,9 @@
 </template>
 
 <script setup>
-	import { onLoad, onShow } from "@dcloudio/uni-app";
 	import { ref, computed, onMounted,  reactive} from 'vue'; 
 	
 	import { discoverType as discoverTypeData} from '../../utils/publicData/discover-type'
-	
 	onMounted(() => {
 		get_discover_photos()
 	})
@@ -68,7 +66,7 @@
 	const options = reactive({
 		effect: 'cards',
 		loop: true,
-		autoplay:true,
+		autoplay: true,
 		cardsEffect: {
 			perSlideOffset: 12,
 			perSlideRotate: 0
@@ -80,9 +78,6 @@
 	const onChange = (item) => {
 		activeType.value = item.id
 		classify.value = item.value
-		if(item.value === 'foreign') {
-			alertDialog.value.open()
-		}
 		get_discover_photos()
 	}
 	const get_discover_photos = () => {

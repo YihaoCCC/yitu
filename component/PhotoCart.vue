@@ -66,7 +66,7 @@
 			.card-info {
 				background: linear-gradient(rgba(0,0,0,0),rgba(74, 74, 74, 1.0));
 				.discription {
-					right: 10%;
+					right: 5%;
 					opacity: 1;
 				}
 			}

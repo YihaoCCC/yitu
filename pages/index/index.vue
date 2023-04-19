@@ -61,7 +61,7 @@
 			</view>
 		</scroll-view>
 		<uni-popup ref="popup" type="message">
-			<uni-popup-message type="warn" message="图片数量较少,请优先体验功能!" :duration="2000"></uni-popup-message>
+			<uni-popup-message type="warn" message="图片现在太少,我得慢慢P,请优先体验功能!" :duration="2000"></uni-popup-message>
 		
 		</uni-popup>
 	</view>
