@@ -1,50 +1,54 @@
 <template>
+	<uni-popup ref="alertDialog" type="dialog">
+		<uni-popup-dialog type="warn" cancelText="我愿意等" confirmText="我愿意等" title="Some Some Some" content="表捉急, 我得上班,功能慢慢开发!" @confirm="dialogConfirm"
+			@close="dialogClose"></uni-popup-dialog>
+	</uni-popup>
 	<view class="calendar" :style="{overflow: disabledScroll ? 'hidden' : 'auto'}" >
 
 		<view class="calendar-card" :style="transform" :class="active === index ? 'active' : ''"
-			v-for="(item,index) in 5" :key="index" @click="(e) => activeCard(index, e)" @touchstart="start" @touchend="backClose">
+			v-for="(dayInfo,index) in calenderData" :key="index" @click="(e) => activeCard(index, e)" @touchstart="start" @touchend="backClose">
 
-			<image class="card-img" src="https://cdn.zebraui.com/zebra-ui/images/swipe-demo/swipe2.jpg"
-				mode="aspectFill"></image>
+			<image class="card-img" :src="dayInfo.coverImg" mode="aspectFill"></image>
 
 			<view class="date">
 				<uni-icons class="calendar-icon" type="calendar" size="30" color="#fff"></uni-icons>
 				<text class="text">Thursday, July 28th to July 31st</text>
 			</view>
+			<view class="place-title">
+				<view class="title">
+					{{dayInfo.title}} 
+				</view>
+				<view class="place">
+					<uni-icons type="location" size="20" color="#989898" style="margin-right: 5px;"></uni-icons> {{ dayInfo.place }}
+				</view>
+				
+			</view>
 			<view class="close" @click.stop="close">
 				<uni-icons type="closeempty" size="20" color="#fff"></uni-icons>
 			</view>
 			<view class="content-warpper">
-
-				<image src="https://cdn.zebraui.com/zebra-ui/images/swipe-demo/swipe2.jpg" mode="aspectFill"></image>
-				<image src="https://cdn.zebraui.com/zebra-ui/images/swipe-demo/swipe2.jpg" mode="aspectFill"></image>
-				<image
-					src="https://mp-3063b247-015d-4a4e-af76-296e5a85e6a4.cdn.bspapp.com/cloudstorage/e873ba5a-58a4-4669-8334-b683a644291e.jpg"
-					mode=" aspectFill"></image>
-				<image
-					src="https://mp-3063b247-015d-4a4e-af76-296e5a85e6a4.cdn.bspapp.com/cloudstorage/82326693-14ee-4a48-8d07-bb23ea6fdcf0.png"
-					mode="aspectFill"></image>
-				<image src="https://cdn.zebraui.com/zebra-ui/images/swipe-demo/swipe2.jpg" mode="aspectFill"></image>
-				<image src="https://cdn.zebraui.com/zebra-ui/images/swipe-demo/swipe2.jpg" mode="aspectFill"></image>
-				<image
-					src="https://mp-3063b247-015d-4a4e-af76-296e5a85e6a4.cdn.bspapp.com/cloudstorage/e873ba5a-58a4-4669-8334-b683a644291e.jpg"
-					mode=" aspectFill"></image>
-				<image
-					src="https://mp-3063b247-015d-4a4e-af76-296e5a85e6a4.cdn.bspapp.com/cloudstorage/82326693-14ee-4a48-8d07-bb23ea6fdcf0.png"
-					mode="aspectFill"></image>
-				<image src="https://cdn.zebraui.com/zebra-ui/images/swipe-demo/swipe2.jpg" mode="aspectFill"></image>
-				<image src="https://cdn.zebraui.com/zebra-ui/images/swipe-demo/swipe2.jpg" mode="aspectFill"></image>
-				<image
-					src="https://mp-3063b247-015d-4a4e-af76-296e5a85e6a4.cdn.bspapp.com/cloudstorage/e873ba5a-58a4-4669-8334-b683a644291e.jpg"
-					mode=" aspectFill"></image>
-				<image
-					src="https://mp-3063b247-015d-4a4e-af76-296e5a85e6a4.cdn.bspapp.com/cloudstorage/82326693-14ee-4a48-8d07-bb23ea6fdcf0.png"
-					mode="aspectFill"></image>
-
+				<view class="content-left">
+					<template v-for="(item, index) in dayInfo.imgList">
+						<view class="content-item" v-if="index % 2 == 1">
+							<image class='content-item-image' :src="item.imgUrl" mode="widthFix" ></image>
+						</view>
+					</template>
+				</view>
+				<view class="content-right">
+					<template v-for="(item, index) in dayInfo.imgList">
+						<view class="content-item" v-if="index % 2 == 0">
+							<image class='content-item-image' :src="item.imgUrl" mode="widthFix" ></image>
+						</view>
+					</template>
+				</view>
 			</view>
 		</view>
-
+		<view class="addAlbum" @click="addAlbum">
+			+ Create a new album
+		</view>
+		
 	</view>
+	
 </template>
 
 <script setup>
@@ -56,12 +60,18 @@
 	import {
 		ref,
 		computed,
-		reactive
+		reactive,
+		onMounted
 	} from 'vue';
 	const clientX = ref()
 	const active = ref(1000)
 	const transform = ref('')
 	const disabledScroll = ref(false)
+	const calenderData = ref([])
+	const alertDialog = ref(null)
+	onMounted(() => {
+		get_calendar_photos()
+	})
 	const activeCard = (index, e) => {
 		setTimeout(() => {
 			uni.hideTabBar()
@@ -90,7 +100,7 @@
 	}
 	const backClose = (e) => {
 			const subX = e.changedTouches[0].clientX - clientX.value;
-			if( subX > 50){
+			if( subX > 110){
 				console.log('右滑')
 				active.value = 999
 				disabledScroll.value = false
@@ -98,12 +108,22 @@
 					uni.showTabBar()
 				}, 800)
 				
-			}else if( subX < -50){
+			}else if( subX < -110){
 				console.log('左滑')
 				
 			}else{
 				console.log('无效')
 			}
+	}
+	const get_calendar_photos = () => {
+		uni.yhHttp.get('/calendar/get_calendar_photo').then(res => {
+			console.log(res);
+			calenderData.value = res.data.data
+		})
+	}
+	
+	const addAlbum = () => {
+		alertDialog.value.open()
 	}
 </script>
 

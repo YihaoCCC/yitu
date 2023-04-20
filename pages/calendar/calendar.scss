@@ -3,10 +3,11 @@
 	height: 100vh;
 	width: 100%;
 	padding-bottom: var(--window-bottom);
+	padding-top: 25px;
 	&.active ~ &{
 		overflow: hidden;
 	}
-	.calendar-card{
+	.calendar-card {
 		padding: 0 22px;
 		box-sizing: border-box;
 		width: 100%;
@@ -25,9 +26,24 @@
 			align-items: center;
 			justify-content: center;
 			color: #fff;
-			
 			.text,.calendar-icon { 
 				transition: transform 1s cubic-bezier(0, 1, 0.95, 1.05);
+			}
+		}
+		.place-title {
+			position: absolute;
+			color: #fff;
+			bottom: 10%;
+			width: calc(100% - 44px);
+			padding: 0 20px;
+			box-sizing: border-box;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			.place {
+				transform: scale(0.7);
+				display: flex;
+				align-items: center;
 			}
 		}
 		&:first-child {
@@ -43,11 +59,23 @@
 			height: 0;
 			overflow: auto;
 			transition: height 1s cubic-bezier(0, 1, 0.95, 1.05);
+			display: flex;
+			justify-content: space-between;
 			
-			image {
-				width: 50%;
-				height: calc(100vw / 2);
+			.content-left, .content-right {
+				width: 49.2%;
+				.content-item {
+					margin: auto;
+					width: 98%;
+					background-color: #fff;
+					overflow: hidden;
+					border-radius: 20px;
+					.content-item-image {
+						width: 100%;
+					}
+				}
 			}
+			
 		}
 		.close {
 			position: fixed;
@@ -90,7 +118,30 @@
 				}
 				
 			}
+			.place-title {
+				bottom: 92vh;
+				.title {
+					transform: scale(1.1);
+				}
+				.place {
+					transform: translateY(150px) scale(0.7);
+				}
+			}
 		}
+	}
+	.addAlbum {
+		width: calc(100% - 44px);
+		background: rgba(3, 31, 42, 0.1);
+		color: #fff;
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+		margin: auto;
+		padding: 20px 15px;
+		box-sizing: border-box;
+		text-align: center;
+		border-radius: 10px;
+		font-family: fantasy;
+		letter-spacing: 2px;
+		font-size: 18px;
 	}
 }
 		
