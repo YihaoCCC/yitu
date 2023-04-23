@@ -7,8 +7,10 @@
 
 		<view class="calendar-card" :style="transform" :class="active === index ? 'active' : ''"
 			v-for="(dayInfo,index) in calenderData" :key="index" @click="(e) => activeCard(index, e)" @touchstart="start" @touchend="backClose">
-
-			<image class="card-img" :src="dayInfo.coverImg" mode="aspectFill"></image>
+			<view class="" style="overflow: hidden;border-radius: 16px;height: 260px;">
+				<image class="card-img" :src="dayInfo.coverImg" mode="aspectFill"></image>
+				
+			</view>
 
 			<view class="date">
 				<uni-icons class="calendar-icon" type="calendar" size="30" color="#fff"></uni-icons>
@@ -19,7 +21,7 @@
 					{{dayInfo.title}} 
 				</view>
 				<view class="place">
-					<uni-icons type="location" size="20" color="#989898" style="margin-right: 5px;"></uni-icons> {{ dayInfo.place }}
+					<uni-icons type="location" size="20" color="#fff" style="margin-right: 5px;"></uni-icons> {{ dayInfo.place }}
 				</view>
 				
 			</view>
@@ -29,14 +31,14 @@
 			<view class="content-warpper">
 				<view class="content-left">
 					<template v-for="(item, index) in dayInfo.imgList">
-						<view class="content-item" v-if="index % 2 == 1">
+						<view class="content-item" v-if="index % 2 == 1" @click="goDetail(item.imgUrl)">
 							<image class='content-item-image' :src="item.imgUrl" mode="widthFix" ></image>
 						</view>
 					</template>
 				</view>
 				<view class="content-right">
 					<template v-for="(item, index) in dayInfo.imgList">
-						<view class="content-item" v-if="index % 2 == 0">
+						<view class="content-item" v-if="index % 2 == 0" @click="goDetail(item.imgUrl)">
 							<image class='content-item-image' :src="item.imgUrl" mode="widthFix" ></image>
 						</view>
 					</template>
@@ -48,7 +50,7 @@
 		</view>
 		
 	</view>
-	
+	<ModelDetail :imgUrl='detailImgUrl' v-show="showDetailModal" @close='closeDetail'></ModelDetail>
 </template>
 
 <script setup>
@@ -63,12 +65,15 @@
 		reactive,
 		onMounted
 	} from 'vue';
+	import ModelDetail from '../../component/ModalDetail.vue'
 	const clientX = ref()
 	const active = ref(1000)
 	const transform = ref('')
 	const disabledScroll = ref(false)
 	const calenderData = ref([])
 	const alertDialog = ref(null)
+	const showDetailModal = ref(false)
+	const detailImgUrl = ref('')
 	onMounted(() => {
 		get_calendar_photos()
 	})
@@ -124,6 +129,15 @@
 	
 	const addAlbum = () => {
 		alertDialog.value.open()
+	}
+	const goDetail = (payload) => {
+		showDetailModal.value = true
+		detailImgUrl.value = payload
+	}
+	const closeDetail = () => {
+		setTimeout(() => {
+			showDetailModal.value = false
+		}, 500)
 	}
 </script>
 
