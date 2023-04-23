@@ -66,9 +66,6 @@
 		uni.yhHttp.get('/location/get_location_photo').then(res => {
 			loactionList.value = res.data.data.sort(function(){return Math.random()>0.5?-1:1;})
 		})
-		setTimeout(() => {
-			goExplore()
-		}, 2000)
 	})
 	const handleChange = () => {
 		
