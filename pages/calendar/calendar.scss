@@ -56,7 +56,7 @@
 			border-radius: 16px;
 			overflow: hidden;
 			animation: float ease 10s infinite;
-			overflow: hidden;
+			animation-delay: 3s;
 			@keyframes float {
 				0% {
 					transform: scale(1);
@@ -75,17 +75,16 @@
 			transition: height 1s cubic-bezier(0, 1, 0.95, 1.05);
 			display: flex;
 			justify-content: space-between;
-			
 			.content-left, .content-right {
-				width: 49.2%;
+				width: 50%;
 				.content-item {
 					margin: auto;
 					width: 98%;
 					background-color: #fff;
 					overflow: hidden;
-					border-radius: 20px;
 					.content-item-image {
 						width: 100%;
+						border-radius: 20px;
 					}
 					
 				}
@@ -97,7 +96,7 @@
 			top: 200px;
 			right: 16px;
 			border-radius: 50%;
-			background: rgba(255, 255, 255, 0.18);
+			background: rgba(32, 32, 32, 0.55);
 			padding: 5px;
 			box-sizing: border-box;
 			visibility: hidden;
@@ -115,6 +114,7 @@
 			}
 			.content-warpper {
 				height: calc(100vh - 260px);
+				padding-top: 5px;
 			}
 			.close {
 				visibility: visible;

@@ -2,14 +2,21 @@
 	<view class="modal" :class="closeModal ? 'close-model' : ''">
 		<image class="modal-img" :src="imgUrl" mode="widthFix"></image>
 		<view class="close" @click="close">
-			<uni-icons type="closeempty" size="20" color="#fff"></uni-icons>
+			<uni-icons type="closeempty" size="30" color="#fff"></uni-icons>
 		</view>
 	</view>
 </template>
 
 <script setup>
-	import { ref } from 'vue'
+	import { ref, onMounted } from 'vue'
 	defineProps(['imgUrl'])
+	
+	const screenHeight = ref('')
+	onMounted(() => {
+		let currentPage = getCurrentPages()
+		currentPage[0].route.indexOf('calendar') !== -1 ? screenHeight.value = '100px' : screenHeight.value = '30px'
+		console.log(screenHeight.value);
+	})
 	const emits = defineEmits(['close'])
 	const closeModal = ref(false)
 	const close = () => {
@@ -62,14 +69,14 @@
 		}
 		.close {
 			position: fixed;
-			top: 20px;
+			top: v-bind(screenHeight);
 			right: 20px;
 			background: rgba(255, 255, 255, 0.5);
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			width: 30px;
-			height: 30px;
+			width: 40px;
+			height: 40px;
 			border-radius: 50%;
 		}
 	}

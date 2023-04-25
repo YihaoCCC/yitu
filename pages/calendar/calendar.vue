@@ -50,7 +50,7 @@
 		</view>
 		
 	</view>
-	<ModelDetail :imgUrl='detailImgUrl' v-show="showDetailModal" @close='closeDetail'></ModelDetail>
+	<ModelDetail :imgUrl='detailImgUrl' v-if="showDetailModal" @close='closeDetail'></ModelDetail>
 </template>
 
 <script setup>
@@ -78,9 +78,7 @@
 		get_calendar_photos()
 	})
 	const activeCard = (index, e) => {
-		setTimeout(() => {
-			uni.hideTabBar()
-		}, 500)
+		uni.hideTabBar()
 		disabledScroll.value = true
 		console.log(window);
 		// 盒子只触发一次点击事件

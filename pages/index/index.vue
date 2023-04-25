@@ -65,7 +65,7 @@
 		
 		</uni-popup>
 	</view>
-	<ModelDetail :imgUrl='detailImgUrl' v-show="showDetailModal" @close='close'></ModelDetail>
+	<ModelDetail :imgUrl='detailImgUrl' v-if="showDetailModal" @close='close'></ModelDetail>
 </template>
 
 <script setup>
