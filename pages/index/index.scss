@@ -75,7 +75,7 @@
 	align-items: center;
 	justify-content: space-between;
 	position: sticky;
-	top: 0;
+	top: -10px;
 	z-index: 8;
 	background-color: #f5f5f5;
 	.more {
@@ -86,6 +86,7 @@
 	height: 100vh;
 	padding: 10px 0px 10px 10px;
 	box-sizing: border-box;
+	overflow: auto;
 	.home-header {
 		width: calc(100% - 30px);
 		height: 60px;

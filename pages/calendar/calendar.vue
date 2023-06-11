@@ -14,7 +14,7 @@
 
 			<view class="date">
 				<uni-icons class="calendar-icon" type="calendar" size="30" color="#fff"></uni-icons>
-				<text class="text">Thursday, July 28th to July 31st</text>
+				<text class="text">{{dayInfo.date}}</text>
 			</view>
 			<view class="place-title">
 				<view class="title">
@@ -30,14 +30,14 @@
 			</view>
 			<view class="content-warpper">
 				<view class="content-left">
-					<template v-for="(item, index) in dayInfo.imgList">
+					<template v-for="(item, index) in dayInfo.imgList" :key="index">
 						<view class="content-item" v-if="index % 2 == 1" @click="goDetail(item.imgUrl)">
 							<image class='content-item-image' :src="item.imgUrl" mode="widthFix" ></image>
 						</view>
 					</template>
 				</view>
 				<view class="content-right">
-					<template v-for="(item, index) in dayInfo.imgList">
+					<template v-for="(item, index) in dayInfo.imgList" :key="index">
 						<view class="content-item" v-if="index % 2 == 0" @click="goDetail(item.imgUrl)">
 							<image class='content-item-image' :src="item.imgUrl" mode="widthFix" ></image>
 						</view>
@@ -121,8 +121,9 @@
 	const get_calendar_photos = () => {
 		uni.yhHttp.get('/calendar/get_calendar_photo').then(res => {
 			console.log(res);
-			calenderData.value = res.data.data
+			calenderData.value = res.data.data.sort((a,b) => a.sort - b.sort)
 		})
+		
 	}
 	
 	const addAlbum = () => {

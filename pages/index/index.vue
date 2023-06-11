@@ -16,7 +16,7 @@
 				Get Started
 			</button>
 		</view>
-		<scroll-view class="home" :scroll-y="true">
+		<view class="home">
 			<view class="home-header">
 				<view class="header-title">
 					<view class="name">
@@ -46,8 +46,8 @@
 					</view>
 			</view>
 			<view class="content-title">
-				<text>Featured</text>
-				<view class="more">
+				<text>Some Pieces</text>
+				<view class="more" @click="goMore">
 					More
 					<uni-icons type="arrow-right" size="20"></uni-icons>
 				</view>
@@ -59,7 +59,7 @@
 				
 				
 			</view>
-		</scroll-view>
+		</view>
 		<uni-popup ref="popup" type="message">
 			<uni-popup-message type="warn" message="图片现在太少,我得慢慢P,请优先体验功能!" :duration="2000"></uni-popup-message>
 		
@@ -133,6 +133,10 @@
 		setTimeout(() => {
 			showDetailModal.value = false
 		}, 500)
+	}
+	
+	const goMore = () => {
+		
 	}
 	
 </script>
